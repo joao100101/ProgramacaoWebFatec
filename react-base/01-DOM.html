@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #root{
+            border: 1px solid red;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        
+    </div>
+    <script>
+        const root = document.querySelector("#root");
+
+        const p = document.createElement('p');
+        p.textContent = "Este parágrafo foi criado em javascript"
+
+        root.appendChild(p);
+
+        const novadiv = document.createElement("div");
+        novadiv.textContent = "Div criada no js";
+        novadiv.style.border= '3px dotted green';
+        novadiv.style.backgroundColor = "limegreen";
+        novadiv.style.padding = "10px";
+        novadiv.style.marginTop = '50px';
+        novadiv.style.textAlign = "center";
+        novadiv.id = "div-verde";
+
+        document.body.appendChild(novadiv);
+
+    </script>
+</body>
+
+
+</html>
