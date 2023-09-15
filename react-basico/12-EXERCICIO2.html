@@ -32,6 +32,53 @@
       Este exercício contará para a nota de Participação e Assiduidade (PA).
     */
 
+    function Form() {
+
+      const valReaisRef = React.useRef()
+      const cotDolarRef = React.useRef()
+      const resultadoRef = React.useRef()
+
+      function handleChange(event) {
+        let valReais = Number(valReaisRef.current.value)
+        let cotDolar = Number(cotDolarRef.current.value)
+
+        let convertido = valReais / cotDolar
+
+        // Exibe o resultado formatado
+        resultadoRef.current.textContent = convertido.toLocaleString(
+          // usa as convenções de separador de milhar e decimal
+          // da língua inglesa. Português do Brasil é pt-BR
+          'en-US',  
+          // USD ~> Dólar americano ($). Real brasileiro é BRL
+          {style: 'currency', currency: 'USD'}
+        )
+      }
+
+      return (
+        <>
+          <h1>Conversor de real para dólar</h1>
+          <form>
+            <div>
+              <label>
+                <span>Valor em reais</span><br/>
+                <input ref={valReaisRef} onChange={handleChange} type="number" />
+              </label>
+            </div>
+            <div>
+              <label>
+                <span>Cotação do dólar</span><br/>
+                <input ref={cotDolarRef} onChange={handleChange} type="number" />
+              </label>
+            </div>
+            <div ref={resultadoRef}></div>
+          </form>
+        </>
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form />)
+
   </script>
   
 </body>
