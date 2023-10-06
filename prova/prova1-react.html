@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function Form() {
+
+
+      //Usando state para ter um objeto com as informações necessárias para calcular o imc
+      const [state, setState] = React.useState({
+        peso: 0,
+        altura: 0
+      }
+      );
+
+      const [imc, setImc] = React.useState('∞');
+
+
+      //Função que será chamada sempre que um input for alterado
+      function handleChange(event) {
+        setState({ ...state, [event.target.name]: event.target.value })
+
+        updateImc();
+
+
+        console.log(state)
+
+      }
+
+      //Função que faz o cálculo do IMC
+      const updateImc = () => {
+        if (!isNaN(state.altura) && !isNaN(state.peso)) {
+          if (state.altura != undefined && state.altura > 0 && state.peso != undefined && state.peso > 0) {
+            let imc = ((Number(state.peso) / Number(state.altura) ** 2).toFixed(4));
+            setImc(imc);
+          } else {
+            setImc('∞')
+          }
+        } else {
+          setImc('∞')
+        }
+      }
+   
+      //Html
+      return (
+        <>
+          <h1>Cálculo do Índice de Massa Corporal</h1>
+          <form>
+            <div>
+              <label>
+                <span>Peso:</span><br />
+                <input onChange={handleChange} type="number" name="peso" />
+              </label>
+            </div>
+            <div>
+              <label>
+                <span>Altura:</span><br />
+                <input onChange={handleChange} type="number" name="altura" />
+              </label>
+            </div>
+            <div>IMC: {imc}</div>
+          </form>
+        </>
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form />)
+
+  </script>
+
+</body>
+
+</html>
